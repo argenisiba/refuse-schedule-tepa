@@ -1,0 +1,108 @@
+{
+ "_ayuda": "Editar solo este archivo. Días: 0=domingo, 1=lunes, 2=martes, 3=miércoles, 4=jueves, 5=viernes, 6=sábado. Notas de ruta: claves definidas en 'notas'. Para quitar una nota, borrar su clave de la lista 'notas' de esa ruta.",
+ "fuente": "Gobierno Municipal de Tepatitlán de Morelos, Jalisco, oficio JASP-213/2026 de la Jefatura de Aseo Público (expediente de transparencia UT 0693/2026)",
+ "actualizado": "26 de octubre de 2026",
+ "aviso": "<b>Sitio ciudadano independiente.</b> Información del oficio JASP-213/2026 de la Jefatura de Aseo Público (26 de octubre de 2026). Algunos datos siguen pendientes de aclarar con el municipio.",
+ "hora_inicio": "Inicia entre 6:00 y 6:30 a. m. (turno matutino)",
+ "horario": "El servicio es de turno matutino: las unidades inician entre las 6:00 y las 6:30 a. m. aproximadamente y terminan según el recorrido de cada una.",
+ "dias_sin_servicio": "La recolección se suspende solo el 1 de enero, el Viernes Santo y el 25 de diciembre.",
+ "contacto": {
+  "jefatura": "Jefatura de Aseo Público Municipal",
+  "domicilio": "Calle Sierra Oriental #290, Tepatitlán de Morelos, Jalisco",
+  "horario": "lunes a viernes, de 8:00 a 16:00",
+  "telefono": "(378) 788 8750"
+ },
+ "pendientes": [
+  "Qué comunidades incluye «Rancherías» (ruta 17).",
+  "El significado de «Convenios» (rutas 15, 16, 21, 24 y 29).",
+  "El horario de la ruta «Vespertina» (ruta 24)."
+ ],
+ "notas": {
+  "c": "Esta ruta incluye «convenios»; estamos aclarando con el municipio a qué se refiere.",
+  "v": "El municipio indica servicio matutino, pero esta ruta se llama «Vespertina»; horario por confirmar.",
+  "r": "Incluye varias rancherías; falta confirmar cuáles comunidades son.",
+  "d": "Delegación alejada: el camión pasa una vez por semana."
+ },
+ "rutas": [
+  {"ruta":1,"nombre":"Centro","dias":[1,2,3,5,6],"notas":[]},
+  {"ruta":2,"nombre":"Las Colonias y Popotes","dias":[1,2,3,5,6],"notas":[]},
+  {"ruta":3,"nombre":"González Gallo","dias":[1,2,3,5,6],"notas":[]},
+  {"ruta":4,"nombre":"Cerrito de la Cruz","dias":[1,2,3,5,6],"notas":[]},
+  {"ruta":5,"nombre":"San Pablo / San Gabriel / Tablón","dias":[1,2,3,5,6],"notas":[]},
+  {"ruta":6,"nombre":"La Villa, Los Sauces, Españita","dias":[1,3,5],"notas":[]},
+  {"ruta":6,"nombre":"Mezcala, Los Sauces, Españita","dias":[2,4,6],"notas":[]},
+  {"ruta":7,"nombre":"Camino a Santa Bárbara","dias":[1,2,3,5,6],"notas":[]},
+  {"ruta":8,"nombre":"Milpillas","dias":[2,4,6],"notas":[]},
+  {"ruta":8,"nombre":"Tecomatlán","dias":[1,5],"notas":[]},
+  {"ruta":8,"nombre":"Mesa del Guitarrero","dias":[3],"notas":[]},
+  {"ruta":9,"nombre":"Colonia de Carmen","dias":[1,2,3,5,6],"notas":[]},
+  {"ruta":10,"nombre":"Aguilillas","dias":[1,2,3,5,6],"notas":[]},
+  {"ruta":11,"nombre":"San José de Gracia","dias":[1,2,3,5,6],"notas":[]},
+  {"ruta":12,"nombre":"Capilla de Guadalupe Sur","dias":[1,2,4,5,6],"notas":[]},
+  {"ruta":13,"nombre":"La Gloria","dias":[1,2,3,5,6],"notas":[]},
+  {"ruta":14,"nombre":"Pegueros","dias":[1,2,4,5,6],"notas":[]},
+  {"ruta":15,"nombre":"Convenios","dias":[1,2,3,4,5,6],"notas":["c"]},
+  {"ruta":16,"nombre":"Convenios","dias":[1,2,3,4,5,6],"notas":["c"]},
+  {"ruta":17,"nombre":"Rancherías","dias":[1,2,3,4,5,6],"notas":["r"]},
+  {"ruta":18,"nombre":"Matamoros y Puente de Palo","dias":[1,2,3,5,6],"notas":[]},
+  {"ruta":19,"nombre":"Capilla Centro","dias":[1,2,4,5,6],"notas":[]},
+  {"ruta":20,"nombre":"Capilla de Guadalupe Norte","dias":[1,2,4,5,6],"notas":[]},
+  {"ruta":21,"nombre":"Convenios y mercado","dias":[0],"notas":["c"]},
+  {"ruta":22,"nombre":"Lomas del Carmen – Tabachines","dias":[1,2,4,5,6],"notas":[]},
+  {"ruta":23,"nombre":"Adobes, La Loma y Oriente","dias":[1,2,3,5,6],"notas":[]},
+  {"ruta":24,"nombre":"Vespertina, Mercado y Convenios","dias":[1,2,3,4,5,6],"notas":["v","c"]},
+  {"ruta":25,"nombre":"Punto Verde","dias":[1,2,3,4,5,6],"notas":[]},
+  {"ruta":26,"nombre":"Fátima y Jihuite","dias":[4],"notas":["d"]},
+  {"ruta":27,"nombre":"Santa Cruz","dias":[4],"notas":["d"]},
+  {"ruta":28,"nombre":"Ojo de Agua – La Mota","dias":[4],"notas":["d"]},
+  {"ruta":29,"nombre":"La Chayotera – Convenios","dias":[4],"notas":["d","c"]},
+  {"ruta":30,"nombre":"Buenavista, La Loma y Mezcalillo","dias":[3],"notas":["d"]}
+ ],
+ "puntos": [
+  {"nombre":"Punto Verde Viveros","horario":"Lunes a viernes, 8:00 a 16:00"},
+  {"nombre":"Punto Verde Núcleo de la Feria","horario":"Lunes a domingo, 7:00 a 20:00"},
+  {"nombre":"Centro de Reciclaje Ecológico","horario":"Lunes a viernes, 8:00 a 16:00; sábados, 8:00 a 14:00"}
+ ],
+ "categorias": {
+  "ord": {
+   "texto": "Va en la recolección ordinaria",
+   "color": "var(--agave)"
+  },
+  "rec": {
+   "texto": "Llévalo a un Punto Verde o al Centro de Reciclaje Ecológico",
+   "color": "var(--rec)"
+  },
+  "esp": {
+   "texto": "Lo atiende Reciclaje Ecológico",
+   "color": "var(--truck)"
+  },
+  "no": {
+   "texto": "Aseo Público no lo atiende; consulta a la Jefatura de Aseo Público",
+   "color": "var(--muted)"
+  }
+ },
+ "objetos": [
+  {"nombre":"cáscaras","categoria":"ord"},
+  {"nombre":"restos de comida","categoria":"ord"},
+  {"nombre":"hojas","categoria":"ord"},
+  {"nombre":"pañal","categoria":"ord"},
+  {"nombre":"servilleta","categoria":"ord"},
+  {"nombre":"unicel","categoria":"ord"},
+  {"nombre":"botella de plástico","categoria":"rec"},
+  {"nombre":"botella de vidrio","categoria":"rec"},
+  {"nombre":"lata","categoria":"rec"},
+  {"nombre":"cartón","categoria":"rec"},
+  {"nombre":"periódico","categoria":"rec"},
+  {"nombre":"pilas","categoria":"esp"},
+  {"nombre":"baterías","categoria":"esp"},
+  {"nombre":"llantas","categoria":"esp"},
+  {"nombre":"colchón","categoria":"esp"},
+  {"nombre":"mueble","categoria":"esp"},
+  {"nombre":"televisión","categoria":"esp"},
+  {"nombre":"refrigerador","categoria":"esp"},
+  {"nombre":"medicinas","categoria":"no"},
+  {"nombre":"escombro","categoria":"no"},
+  {"nombre":"aceite de cocina","categoria":"no"},
+  {"nombre":"poda","categoria":"no"}
+ ]
+}

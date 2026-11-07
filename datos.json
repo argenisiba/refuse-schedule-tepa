@@ -1,5 +1,5 @@
 {
- "_ayuda": "Editar solo este archivo. Días: 0=domingo, 1=lunes, 2=martes, 3=miércoles, 4=jueves, 5=viernes, 6=sábado. Notas de ruta: claves definidas en 'notas'. Para quitar una nota, borrar su clave de la lista 'notas' de esa ruta.",
+ "_ayuda": "Edita solo este archivo. Días: 0=domingo, 1=lunes, 2=martes, 3=miércoles, 4=jueves, 5=viernes, 6=sábado. Notas de ruta: claves definidas en 'notas'. Para quitar una nota, borra su clave de la lista 'notas' de esa ruta.",
  "fuente": "Gobierno Municipal de Tepatitlán de Morelos, Jalisco, oficio JASP-213/2026 de la Jefatura de Aseo Público (expediente de transparencia UT 0693/2026)",
  "actualizado": "26 de octubre de 2026",
  "aviso": "<b>Sitio ciudadano independiente.</b> Información del oficio JASP-213/2026 de la Jefatura de Aseo Público (26 de octubre de 2026). Algunos datos siguen pendientes de aclarar con el municipio.",
@@ -12,6 +12,8 @@
   "horario": "lunes a viernes, de 8:00 a 16:00",
   "telefono": "(378) 788 8750"
  },
+ "calendario": {"titulo":"Pasa el camión de la basura","texto_recordatorio":"Mañana pasa el camión de la basura por tu ruta. Entrega tus residuos cuando pase la unidad.","hora_inicio":"06:00","duracion_min":30,"vigencia_hasta":"20261231","fechas_sin_servicio":["20261225"],"por_defecto":1,"recordatorios":[{"etiqueta":"8:00 p. m. del día anterior","horas_antes":10},{"etiqueta":"9:00 p. m. del día anterior","horas_antes":9},{"etiqueta":"10:00 p. m. del día anterior","horas_antes":8}]},
+  "vista_dia": {"titulo":"¿Qué rutas pasan hoy?","nota":"Elige un día para ver todas las rutas con servicio."},
  "pendientes": [
   "Qué comunidades incluye «Rancherías» (ruta 17).",
   "El significado de «Convenios» (rutas 15, 16, 21, 24 y 29).",

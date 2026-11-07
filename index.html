@@ -52,6 +52,8 @@ select,input[type=search]{width:100%;font:inherit;padding:.7rem .8rem;border:2px
 .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem;margin-top:2rem}
 .tile{background:var(--surface);border:1px solid var(--line);border-radius:.6rem;padding:1rem;text-align:left;font:inherit;color:inherit;cursor:pointer}
 .tile:hover{border-color:var(--agave)}
+.mini{font:600 .85rem "Public Sans",system-ui,sans-serif;padding:.35rem .6rem;border:2px solid var(--agave);background:none;color:var(--agave);border-radius:.4rem;cursor:pointer;white-space:nowrap}
+.mini:hover{background:var(--agave);color:var(--agave-ink)}
 .tile h3{margin-bottom:.25em}
 .tile span{color:var(--muted);font-size:.92rem}
 .tbl{overflow-x:auto;max-width:100%}
@@ -97,10 +99,19 @@ footer{border-top:1px solid var(--line);padding:1.5rem 0 2rem;color:var(--muted)
 <section class="page" id="p-horarios">
 <h2>Horarios y rutas de recolección</h2>
 <p><span class="horario"></span> Escribe para filtrar por número de ruta o localidad.</p>
+<div class="card" id="vista-dia">
+  <h3 id="vd-titulo"></h3>
+  <p id="vd-nota"></p>
+  <label for="vd-dia">Día</label>
+  <select id="vd-dia"></select>
+  <div id="vd-lista" aria-live="polite"></div>
+</div>
 <label for="q">Buscar ruta o localidad</label>
 <input type="search" id="q" placeholder="Ej. Capilla">
 <div class="tbl" style="margin-top:1rem"><table>
-<thead><tr><th>Ruta</th><th>Zona o localidad</th><th>Días de recolección</th></tr></thead>
+    <label for="rem2" style="margin-top:1rem">Avisarme a las (recordatorio del calendario)</label>
+<select id="rem2"></select>
+<thead><tr><th>Ruta</th><th>Zona o localidad</th><th>Días de recolección</th><th>Calendario</th></tr></thead>
 <tbody id="tb"></tbody></table></div>
 <h3 style="margin-top:2rem">Cómo entregar tus residuos</h3>
 <div class="card">Entrega tus residuos solo al paso y con presencia de la unidad recolectora, para evitar focos de infección y basura en la calle. No hay restricción de bolsa ni contenedor.</div>
@@ -114,7 +125,7 @@ footer{border-top:1px solid var(--line);padding:1.5rem 0 2rem;color:var(--muted)
 <p>En Tepatitlán la separación en casa <b>no es obligatoria</b>. La ruta ordinaria capta residuos orgánicos e inorgánicos y separarlos es voluntario. Los camiones cuentan con un compartimento para depositar residuos orgánicos.</p>
 <div class="cols">
 <div class="col" style="--c:var(--agave)"><h3>Recolección ordinaria</h3><ul><li>Residuos orgánicos e inorgánicos</li><li>Se entregan al paso del camión</li><li>Separarlos es voluntario</li></ul></div>
-<div class="col" style="--c:var(--rec)"><h3>Reciclaje</h3><ul><li>No forma parte de la ruta común</li><li>Se atiende por solicitud directa y programada en Reciclaje Ecológico</li><li>También puede llevar materiales a los Puntos Verdes</li></ul></div>
+<div class="col" style="--c:var(--rec)"><h3>Reciclaje</h3><ul><li>No forma parte de la ruta común</li><li>Se atiende por solicitud directa y programada en Reciclaje Ecológico</li><li>También puedes llevar materiales a los Puntos Verdes</li></ul></div>
 </div>
 <h3 style="margin-top:2rem">Puntos Verdes y centro de reciclaje</h3>
 <div id="puntos"></div>
@@ -159,7 +170,7 @@ footer{border-top:1px solid var(--line);padding:1.5rem 0 2rem;color:var(--muted)
 <footer><div class="wrap" id="pie"></div></footer>
 
 <script>
-/* Los datos viven en datos.json (mismo folder) */
+/* Los datos viven en datos.json (mismo folder). Este código no necesita editarse para actualizar horarios, rutas, contacto o avisos. */
 var DIAS=["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 var PAGES=[["inicio","Inicio"],["horarios","Horarios y rutas"],["reciclaje","Reciclaje"],["especiales","Residuos especiales"],["avisos","Avisos"],["contacto","Contacto"]];
 var D=null,RUTAS=[];
@@ -189,6 +200,17 @@ function fill(){
  $("tiles").innerHTML=[["horarios","Horarios y rutas","Todas las rutas y sus días de servicio"],["reciclaje","Reciclaje","Puntos Verdes y cómo se atiende"],["especiales","Residuos especiales","Muebles, pilas, llantas y más"],["contacto","Contacto","Jefatura de Aseo Público"]].map(function(t){return '<button class="tile" onclick="show(\''+t[0]+'\')"><h3>'+t[1]+'</h3><span>'+t[2]+'</span></button>'}).join("");
  $("puntos").innerHTML=D.puntos.map(function(x){return '<div class="card"><h3>'+x.nombre+'</h3><p>'+x.horario+'</p></div>'}).join("");
  $("col").onchange=result;$("q").oninput=table;$("obj").oninput=objSearch;
+  var V=D.vista_dia||{titulo:"¿Qué rutas pasan hoy?",nota:""};
+ $("vd-titulo").textContent=V.titulo;
+ $("vd-nota").textContent=V.nota;
+ var sd=$("vd-dia"),hoy=new Date().getDay();
+ sd.innerHTML="";
+ DIAS.forEach(function(n,i){var o=document.createElement("option");o.value=i;o.textContent=n+(i===hoy?" (hoy)":"");sd.appendChild(o)});
+ sd.value=hoy;
+ sd.onchange=vistaDia;
+ vistaDia();
+  var K=D.calendario;
+ if(K){$("rem2").innerHTML=K.recordatorios.map(function(o,i){return '<option value="'+i+'"'+(i===K.por_defecto?' selected':'')+'>'+o.etiqueta+'</option>'}).join("")}
  table();result();objSearch();
 }
 function result(){
@@ -201,11 +223,50 @@ function result(){
  for(var d=0;d<7;d++){h+='<div class="day'+(d===n.getDay()?" today":"")+'"><strong>'+DIAS[d].slice(0,3)+'</strong>'+(x.dias.indexOf(d)>-1?'<span class="dot" style="--c:var(--agave)" title="Hay recolección"></span><span style="display:none">Hay recolección</span>':'')+'</div>'}
  h+='</div>';
  x.notas.forEach(function(f){if(D.notas[f])h+='<div class="card" style="margin-top:.8rem">'+D.notas[f]+'</div>'});
+ var K=D.calendario;
+ h+='<div class="card" style="margin-top:.8rem"><h3>Recordatorio en tu calendario</h3><p>Descarga los días de esta ruta y recibe un aviso la noche anterior desde la app de calendario de tu celular.</p><label for="rem">Avisarme a las</label><select id="rem">'+K.recordatorios.map(function(o,i){return '<option value="'+i+'"'+(i===K.por_defecto?' selected':'')+'>'+o.etiqueta+'</option>'}).join("")+'</select><button class="tile" id="ics" style="margin-top:.8rem">Agregar a mi calendario</button></div>';
  r.innerHTML=h;r.className="res show";
+ $("ics").onclick=function(){ics(x)};
+}
+function pad(n){return (n<10?"0":"")+n}
+function ymd(d){return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())}
+function esc(t){return String(t).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n")}
+function fold(l){var o=[];while(l.length>60){o.push(l.slice(0,60));l=" "+l.slice(60)}o.push(l);return o.join("\r\n")}
+function icsText(x,remIdx,now){
+ var K=D.calendario,hh=K.hora_inicio.split(":"),d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+1);
+ for(var i=0;i<7&&x.dias.indexOf(d.getDay())<0;i++)d.setDate(d.getDate()+1);
+ if(ymd(d)>K.vigencia_hasta)return null;
+ var rem=K.recordatorios[remIdx],t0=hh[0]+hh[1]+"00",fin=new Date(2000,0,1,+hh[0],+hh[1]+K.duracion_min),
+ by=x.dias.map(function(k){return["SU","MO","TU","WE","TH","FR","SA"][k]}).join(","),
+ L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Aseo Tepatitlan//ES","CALSCALE:GREGORIAN","BEGIN:VEVENT",
+ "UID:ruta"+x.ruta+"-"+x.nombre.replace(/[^A-Za-z0-9]/g,"")+"@aseo-tepatitlan",
+ "DTSTAMP:"+now.toISOString().replace(/[-:]/g,"").slice(0,15)+"Z",
+ "DTSTART:"+ymd(d)+"T"+t0,"DTEND:"+ymd(d)+"T"+pad(fin.getHours())+pad(fin.getMinutes())+"00",
+ "RRULE:FREQ=WEEKLY;BYDAY="+by+";UNTIL="+K.vigencia_hasta+"T235959"];
+ (K.fechas_sin_servicio||[]).forEach(function(f){L.push("EXDATE:"+f+"T"+t0)});
+ L.push("SUMMARY:"+esc(K.titulo+" · Ruta "+x.ruta+" ("+x.nombre+")"),"DESCRIPTION:"+esc(D.hora_inicio+". "+D.dias_sin_servicio),
+ "BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+esc(K.texto_recordatorio),"TRIGGER:-PT"+(rem.horas_antes)+"H","END:VALARM","END:VEVENT","END:VCALENDAR");
+ return L.map(fold).join("\r\n")+"\r\n";
+}
+function ics(x,sel){
+ var t=icsText(x,(sel||$("rem")).value,new Date());
+ if(!t){alert("Los horarios publicados solo están vigentes hasta el "+D.calendario.vigencia_hasta+".");return}
+ var b=new Blob([t],{type:"text/calendar;charset=utf-8"}),a=document.createElement("a");
+ a.href=URL.createObjectURL(b);a.download="recoleccion-ruta-"+x.ruta+".ics";document.body.appendChild(a);a.click();a.remove();
+}
+function vistaDia(){
+ var v=$("vd-dia").value,
+ rows=RUTAS.filter(function(x){return x.dias.indexOf(+v)>-1});
+ $("vd-lista").innerHTML=rows.length
+  ? "<p><b>"+rows.length+(rows.length===1?" ruta":" rutas")+"</b> con servicio el "+DIAS[v].toLowerCase()+":</p><ul>"+rows.map(function(x){return "<li>Ruta "+x.ruta+" · "+x.nombre+"</li>"}).join("")+"</ul>"
+  : "<p>No hay rutas con servicio ese día.</p>";
 }
 function table(){
  var q=$("q").value.toLowerCase(),rows=RUTAS.filter(function(x){return (x.ruta+" "+x.nombre).toLowerCase().indexOf(q)>-1});
- $("tb").innerHTML=rows.length?rows.map(function(x){return '<tr><td>'+x.ruta+'</td><td>'+x.nombre+(x.notas.length?' <span class="pend">ver nota</span>':'')+'</td><td>'+dias(x)+'</td></tr>'}).join(""):'<tr><td colspan="3">No encontramos esa ruta. Llama a la Jefatura de Aseo Público al '+D.contacto.telefono+'.</td></tr>';
+ $("tb").innerHTML=rows.length?rows.map(function(x){
+  var btn=D.calendario?'<button class="mini" aria-label="Agregar la ruta '+x.ruta+' al calendario" onclick="ics(RUTAS['+RUTAS.indexOf(x)+'],$(\'rem2\'))">Agregar</button>':'';
+  return '<tr><td>'+x.ruta+'</td><td>'+x.nombre+(x.notas.length?' <span class="pend">ver nota</span>':'')+'</td><td>'+dias(x)+'</td><td>'+btn+'</td></tr>'}).join("")
+ :'<tr><td colspan="4">No encontramos esa ruta. Llama a la Jefatura de Aseo Público al '+D.contacto.telefono+'.</td></tr>';
 }
 function objSearch(){
  var q=$("obj").value.toLowerCase().trim(),o=$("objres");
@@ -214,7 +275,7 @@ function objSearch(){
  o.innerHTML=m.length?m.map(function(x){var t=D.categorias[x.categoria]||{texto:"",color:"var(--muted)"};return '<div class="hit" style="--c:'+t.color+'"><b>'+x.nombre+'</b> · '+t.texto+'</div>'}).join(""):'<div class="hit" style="--c:var(--muted)">No lo tenemos en la lista todavía. Consulta a la Jefatura de Aseo Público.</div>';
 }
 nav();show((location.hash||"#inicio").slice(1));
-fetch("datos.json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(d){D=d;fill()}).catch(function(){$("aviso").textContent="No se pudieron cargar los datos (datos.json)."});
+fetch("datos.json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(d){D=d;fill()}).catch(function(){$("aviso").textContent="No se pudieron cargar los datos (datos.json). Si abriste el archivo con doble clic, usa Live Server en VS Code o publícalo en GitHub Pages; además, revisa que datos.json esté en la misma carpeta y no tenga errores de comas o comillas."});
 </script>
 </body>
 </html>

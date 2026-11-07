@@ -12,8 +12,9 @@
   "horario": "lunes a viernes, de 8:00 a 16:00",
   "telefono": "(378) 788 8750"
  },
- "calendario": {"titulo":"Pasa el camión de la basura","texto_recordatorio":"Mañana pasa el camión de la basura por tu ruta. Entrega tus residuos cuando pase la unidad.","hora_inicio":"06:00","duracion_min":30,"vigencia_hasta":"20261231","fechas_sin_servicio":["20261225"],"por_defecto":1,"recordatorios":[{"etiqueta":"8:00 p. m. del día anterior","horas_antes":10},{"etiqueta":"9:00 p. m. del día anterior","horas_antes":9},{"etiqueta":"10:00 p. m. del día anterior","horas_antes":8}]},
+ "calendario": {"titulo":"Pasa el camión de la basura","texto_recordatorio":"Mañana pasa el camión de la basura por tu ruta. Entrega tus residuos cuando pase la unidad.","hora_inicio":"06:00","duracion_min":30,"vigencia_hasta":"20261231","por_defecto":1,"recordatorios":[{"etiqueta":"8:00 p. m. del día anterior","horas_antes":10},{"etiqueta":"9:00 p. m. del día anterior","horas_antes":9},{"etiqueta":"10:00 p. m. del día anterior","horas_antes":8}]},
   "vista_dia": {"titulo":"¿Qué rutas pasan hoy?","nota":"Elige un día para ver todas las rutas con servicio."},
+   "sin_servicio": {"avisar_dias_antes":7,"fechas":[{"fecha":"20261225","nombre":"Navidad"},{"fecha":"20270101","nombre":"Año Nuevo"},{"fecha":"20270326","nombre":"Viernes Santo"}]},
  "pendientes": [
   "Qué comunidades incluye «Rancherías» (ruta 17).",
   "El significado de «Convenios» (rutas 15, 16, 21, 24 y 29).",
